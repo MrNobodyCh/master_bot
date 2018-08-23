@@ -1,0 +1,631 @@
+2018-08-14 11:42:14 AM finished add goods to record with record_id: 60707607
+2018-08-14 11:42:15 AM finished add service to record with record_id: 60707607
+2018-08-14 11:43:49 AM Error during photo processing: 'NoneType' object has no attribute '__getitem__'
+2018-08-14 11:44:25 AM finished add goods to record with record_id: 60707607
+2018-08-14 11:44:27 AM finished add service to record with record_id: 60707607
+2018-08-14 11:46:44 AM finished add goods to record with record_id: 60707607
+2018-08-14 11:46:46 AM finished add service to record with record_id: 60707607
+2018-08-14 11:49:55 AM finished add goods to record with record_id: 60707607
+2018-08-14 11:49:56 AM finished add service to record with record_id: 60707607
+2018-08-14 11:53:24 AM finished add goods to record with record_id: 60710193
+2018-08-14 11:53:26 AM finished add service to record with record_id: 60710193
+2018-08-14 12:01:02 PM finished add goods to record with record_id: 60707607
+2018-08-14 12:01:04 PM finished add service to record with record_id: 60707607
+2018-08-14 21:55:33 PM OperationalError occurred, args=('could not connect to server: No such file or directory\n\tIs the server running locally and accepting\n\tconnections on Unix domain socket "/tmp/.s.PGSQL.5432"?\n',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 91, in greeting_menu
+    user_auth = DBGetter(DBSettings.HOST).get("SELECT COUNT(*) FROM authorized_users "
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 136, in __init__
+    self.connection = psycopg2.connect(dbname=dbname)
+  File "/Library/Python/2.7/site-packages/psycopg2/__init__.py", line 130, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+OperationalError: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+
+2018-08-14 21:55:33 PM could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+2018-08-14 21:55:38 PM could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+2018-08-14 21:55:38 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:07:42 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:25:07 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:25:09 PM finished add service to record with record_id: 60806983
+2018-08-14 22:26:18 PM finished add goods to record with record_id: 60806990
+2018-08-14 22:26:18 PM finished add goods to record with record_id: 60806990
+2018-08-14 22:26:19 PM ValueError occurred, args=('No JSON object could be decoded',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 971, in send_report_to_yclients
+    seance_length=seance_length, comment=record_comment)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 102, in change_record
+    return json.loads(response.text)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 338, in loads
+    return _default_decoder.decode(s)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 366, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 384, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+
+2018-08-14 22:26:19 PM No JSON object could be decoded
+2018-08-14 22:26:19 PM finished add service to record with record_id: 60806990
+2018-08-14 22:26:19 PM finished add goods to record with record_id: 60806990
+2018-08-14 22:26:21 PM finished add service to record with record_id: 60806990
+2018-08-14 22:26:24 PM No JSON object could be decoded
+2018-08-14 22:26:24 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:26:29 PM No JSON object could be decoded
+2018-08-14 22:26:30 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:26:34 PM No JSON object could be decoded
+2018-08-14 22:26:34 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:26:39 PM No JSON object could be decoded
+2018-08-14 22:26:39 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:26:44 PM No JSON object could be decoded
+2018-08-14 22:26:49 PM No JSON object could be decoded
+2018-08-14 22:26:54 PM No JSON object could be decoded
+2018-08-14 22:26:54 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:26:59 PM No JSON object could be decoded
+2018-08-14 22:27:01 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:27:04 PM No JSON object could be decoded
+2018-08-14 22:27:04 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:27:09 PM No JSON object could be decoded
+2018-08-14 22:27:09 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:27:14 PM No JSON object could be decoded
+2018-08-14 22:27:19 PM No JSON object could be decoded
+2018-08-14 22:27:24 PM No JSON object could be decoded
+2018-08-14 22:27:29 PM No JSON object could be decoded
+2018-08-14 22:27:34 PM No JSON object could be decoded
+2018-08-14 22:27:39 PM No JSON object could be decoded
+2018-08-14 22:27:44 PM No JSON object could be decoded
+2018-08-14 22:27:49 PM No JSON object could be decoded
+2018-08-14 22:27:54 PM No JSON object could be decoded
+2018-08-14 22:27:56 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:27:57 PM finished add service to record with record_id: 60806983
+2018-08-14 22:27:59 PM No JSON object could be decoded
+2018-08-14 22:28:02 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:28:02 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:28:03 PM finished add service to record with record_id: 60806983
+2018-08-14 22:28:03 PM finished add service to record with record_id: 60806983
+2018-08-14 22:28:04 PM No JSON object could be decoded
+2018-08-14 22:28:04 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:28:05 PM finished add service to record with record_id: 60806983
+2018-08-14 22:28:09 PM No JSON object could be decoded
+2018-08-14 22:28:09 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:28:14 PM No JSON object could be decoded
+2018-08-14 22:28:19 PM No JSON object could be decoded
+2018-08-14 22:28:19 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:28:22 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:28:24 PM No JSON object could be decoded
+2018-08-14 22:28:24 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:28:29 PM No JSON object could be decoded
+2018-08-14 22:28:31 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:28:34 PM No JSON object could be decoded
+2018-08-14 22:34:42 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:34:42 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:34:42 PM ValueError occurred, args=('No JSON object could be decoded',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 971, in send_report_to_yclients
+    seance_length=seance_length, comment=record_comment)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 102, in change_record
+    return json.loads(response.text)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/__init__.py", line 338, in loads
+    return _default_decoder.decode(s)
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 366, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+  File "/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/json/decoder.py", line 384, in raw_decode
+    raise ValueError("No JSON object could be decoded")
+ValueError: No JSON object could be decoded
+
+2018-08-14 22:34:42 PM No JSON object could be decoded
+2018-08-14 22:34:43 PM finished add service to record with record_id: 60806983
+2018-08-14 22:34:43 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:34:44 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:34:44 PM finished add service to record with record_id: 60806983
+2018-08-14 22:34:47 PM finished add service to record with record_id: 60806983
+2018-08-14 22:34:47 PM No JSON object could be decoded
+2018-08-14 22:34:47 PM finished add goods to record with record_id: 60806983
+2018-08-14 22:34:48 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-14 22:34:48 PM finished add service to record with record_id: 60806983
+2018-08-15 13:19:42 PM finished add goods to record with record_id: 60865793
+2018-08-15 13:19:44 PM finished add service to record with record_id: 60865793
+2018-08-15 13:20:47 PM finished add goods to record with record_id: 60865879
+2018-08-15 13:20:49 PM finished add service to record with record_id: 60865879
+2018-08-15 13:22:09 PM finished add goods to record with record_id: 60865946
+2018-08-15 16:21:49 PM OperationalError occurred, args=('could not connect to server: No such file or directory\n\tIs the server running locally and accepting\n\tconnections on Unix domain socket "/tmp/.s.PGSQL.5432"?\n',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 91, in greeting_menu
+    user_auth = DBGetter(DBSettings.HOST).get("SELECT COUNT(*) FROM authorized_users "
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 136, in __init__
+    self.connection = psycopg2.connect(dbname=dbname)
+  File "/Library/Python/2.7/site-packages/psycopg2/__init__.py", line 130, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+OperationalError: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+
+2018-08-15 16:21:49 PM could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+2018-08-22 19:36:05 PM OperationalError occurred, args=('could not connect to server: No such file or directory\n\tIs the server running locally and accepting\n\tconnections on Unix domain socket "/tmp/.s.PGSQL.5432"?\n',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 91, in greeting_menu
+    user_auth = DBGetter(DBSettings.HOST).get("SELECT COUNT(*) FROM authorized_users "
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 136, in __init__
+    self.connection = psycopg2.connect(dbname=dbname)
+  File "/Library/Python/2.7/site-packages/psycopg2/__init__.py", line 130, in connect
+    conn = _connect(dsn, connection_factory=connection_factory, **kwasync)
+OperationalError: could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+
+2018-08-22 19:36:05 PM could not connect to server: No such file or directory
+	Is the server running locally and accepting
+	connections on Unix domain socket "/tmp/.s.PGSQL.5432"?
+
+2018-08-22 19:36:18 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=BotSettings.CHANNEL_REPORTS, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:36:18 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 19:36:59 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=BotSettings.CHANNEL_REPORTS, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:36:59 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 19:37:21 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=BotSettings.CHANNEL_REPORTS, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:37:21 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 19:37:52 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=-1162400053, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:37:52 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 19:38:07 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=-10727253510571588659, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:38:07 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 19:39:01 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 295, in test
+    bot.send_message(chat_id=-1162400053, text="test post for the channel")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+
+2018-08-22 19:39:01 PM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: chat not found"}]
+2018-08-22 20:13:49 PM finished add goods to record with record_id: 61929035
+2018-08-22 20:13:50 PM finished add service to record with record_id: 61929035
+2018-08-22 20:16:04 PM finished add goods to record with record_id: 61929035
+2018-08-22 20:16:07 PM finished add service to record with record_id: 61929035
+2018-08-22 20:19:24 PM finished add goods to record with record_id: 61929035
+2018-08-22 20:21:58 PM finished add goods to record with record_id: 61929035
+2018-08-22 20:22:00 PM finished add service to record with record_id: 61929035
+2018-08-22 20:23:47 PM finished add goods to record with record_id: 61930041
+2018-08-22 20:23:48 PM finished add service to record with record_id: 61930041
+2018-08-23 10:23:33 AM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:\n[{"ok":false,"error_code":400,"description":"Bad Request: can\'t parse entities: Can\'t find end of the entity starting at byte offset 111"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 223, in test
+    parse_mode="Markdown")
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 465, in send_message
+    reply_markup, parse_mode, disable_notification))
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 135, in send_message
+    return _make_request(token, method_url, params=payload, method='post')
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 111"}]
+
+2018-08-23 10:23:33 AM A request to the Telegram API was unsuccessful. The server returned HTTP 400 Bad Request. Response body:
+[{"ok":false,"error_code":400,"description":"Bad Request: can't parse entities: Can't find end of the entity starting at byte offset 111"}]
+2018-08-23 17:25:31 PM finished add goods to record with record_id: 62053422
+2018-08-23 17:25:33 PM finished add service to record with record_id: 62053422
+2018-08-23 17:27:58 PM Error during photo processing: 'file_id'
+2018-08-23 17:28:52 PM Error during photo processing: 'file_id'
+2018-08-23 17:30:15 PM finished add goods to record with record_id: 62053422
+2018-08-23 17:30:16 PM finished add service to record with record_id: 62053422
+2018-08-23 17:31:12 PM KeyError occurred, args=('file_id',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 800, in <lambda>
+    bot.register_next_step_handler(msg, lambda m: process_photo(m, record_id))
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 826, in process_photo
+    uploaded_photo = UploadCareGetter().upload_photo(photo_url=telegram_photo_url)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 185, in upload_photo
+    return "https://ucarecdn.com/%s/%s" % (r.json()["file_id"], r.json()["filename"])
+KeyError: 'file_id'
+
+2018-08-23 17:31:12 PM 'file_id'
+2018-08-23 17:31:58 PM KeyError occurred, args=('file_id',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 800, in <lambda>
+    bot.register_next_step_handler(msg, lambda m: process_photo(m, record_id))
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/master_bot.py", line 826, in process_photo
+    uploaded_photo = UploadCareGetter().upload_photo(photo_url=telegram_photo_url)
+  File "/Users/e_chupikov/Documents/nim/misc/master_bot/getters.py", line 186, in upload_photo
+    return "https://ucarecdn.com/%s/%s" % (r.json()["file_id"], r.json()["filename"])
+KeyError: 'file_id'
+
+2018-08-23 17:31:58 PM 'file_id'
+2018-08-23 17:32:03 PM 'file_id'
+2018-08-23 17:32:03 PM ApiException occurred, args=('A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:\n[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]',)
+Traceback (most recent call last):
+  File "/Library/Python/2.7/site-packages/telebot/util.py", line 59, in run
+    task(*args, **kwargs)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 159, in __retrieve_updates
+    updates = self.get_updates(offset=(self.last_update_id + 1), timeout=timeout)
+  File "/Library/Python/2.7/site-packages/telebot/__init__.py", line 129, in get_updates
+    json_updates = apihelper.get_updates(self.token, offset, limit, timeout, allowed_updates)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 175, in get_updates
+    return _make_request(token, method_url, params=payload)
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 56, in _make_request
+    return _check_result(method_name, result)['result']
+  File "/Library/Python/2.7/site-packages/telebot/apihelper.py", line 75, in _check_result
+    raise ApiException(msg, method_name, result)
+ApiException: A request to the Telegram API was unsuccessful. The server returned HTTP 409 Conflict. Response body:
+[{"ok":false,"error_code":409,"description":"Conflict: terminated by other getUpdates request; make sure that only one bot instance is running"}]
+
+2018-08-23 19:10:52 PM Error during photo processing: 'file_id'
+2018-08-23 19:15:31 PM Error during photo processing: 'file_id'
