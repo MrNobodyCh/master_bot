@@ -145,9 +145,12 @@ def process_phone_number(message):
     phone = message.contact.phone_number
     yclients_phones = []
     for staff in yclient_api.get_all_staff():
-        if str(staff["user"]["phone"]) == str(phone):
-            staff_id = staff["id"]
-            yclients_phones.append(staff["user"]["phone"])
+        try:
+            if str(staff["user"]["phone"]) == str(phone):
+                staff_id = staff["id"]
+                yclients_phones.append(staff["user"]["phone"])
+        except TypeError as error:
+            logging.info("phone number processing error: {}".format(error))
 
     if yclients_phones.count(phone) != 0:
         msg = bot.send_message(chat_id=user_id, text=texts.PHONE_FOUND)
