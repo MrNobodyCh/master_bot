@@ -820,6 +820,8 @@ def process_photo(message, record_id):
             bot.send_message(chat_id=message.chat.id, text="Отменено", reply_markup=markup)
     else:
         try:
+            bot.send_message(chat_id=message.chat.id, text=texts.UPLOADING_PHOTO)
+            bot.send_chat_action(chat_id=message.chat.id, action="upload_photo")
             # process photo and add it to DB
             file_id = str(message.photo[-1].file_id)
             photo_path = bot.get_file(file_id).file_path
@@ -872,12 +874,13 @@ def send_report_to_yclients(call):
         photo = DBGetter(DBSettings.HOST).get("SELECT photo FROM reports WHERE record_id = %s" % record_id)[0][0]
         main_service_id = DBGetter(DBSettings.HOST).get("SELECT service_id FROM reports "
                                                         "WHERE record_id = %s" % record_id)[0][0]
+        master_comment_for_goods = "Фото работы: {}".format(photo)
         if master_comment_db is None:
-            master_comment_for_goods = photo
             master_comment_channel = texts.NO
+            master_comment_for_record = record_info["comment"]
         else:
-            master_comment_for_goods = "{}. Фото работы: {}".format(master_comment_db, photo)
             master_comment_channel = master_comment_db
+            master_comment_for_record = master_comment_db
 
         try:
             goods_to_show = {}
@@ -998,7 +1001,6 @@ def send_report_to_yclients(call):
                 "email": record_info["client"]["email"],
             }
             seance_length = record_info["seance_length"]
-            record_comment = record_info["comment"]
             main_service_info = yclient_api.get_specific_service(main_service_id)
             main_service_name = main_service_info["title"]
             main_service_cost = main_service_info["price_min"]
@@ -1012,7 +1014,7 @@ def send_report_to_yclients(call):
             # add main service to the record
             change_request = yclient_api.change_record(record_id=record_id, staff_id=staff_id, services=services_info,
                                                        client=client_info, datetime=record_datetime, attendance=1,
-                                                       seance_length=seance_length, comment=record_comment)
+                                                       seance_length=seance_length, comment=master_comment_for_record)
             if isinstance(change_request, dict) and change_request.get('errors'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
@@ -1049,7 +1051,6 @@ def send_report_to_yclients(call):
                 "email": record_info["client"]["email"],
             }
             seance_length = record_info["seance_length"]
-            record_comment = record_info["comment"]
             main_service_info = yclient_api.get_specific_service(main_service_id)
             main_service_name = main_service_info["title"]
             main_service_cost = main_service_info["price_min"]
@@ -1074,7 +1075,7 @@ def send_report_to_yclients(call):
             # add main service to the record
             change_request = yclient_api.change_record(record_id=record_id, staff_id=staff_id, services=services_info,
                                                        client=client_info, datetime=record_datetime, attendance=1,
-                                                       seance_length=seance_length, comment=record_comment)
+                                                       seance_length=seance_length, comment=master_comment_for_record)
             if isinstance(change_request, dict) and change_request.get('errors'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)

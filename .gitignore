@@ -54,6 +54,7 @@ coverage.xml
 ../../misc/tilda_listener/debug.log
 local_settings.py
 config.py
+debug.log
 # Flask stuff:
 instance/
 .webassets-cache
