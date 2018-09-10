@@ -150,7 +150,7 @@ def process_phone_number(message):
                 staff_id = staff["id"]
                 yclients_phones.append(staff["user"]["phone"])
         except TypeError as error:
-            logging.info("phone number processing error: {}".format(error))
+            logging.info("phone number {} processing error: {}".format(phone, error))
             pass
 
     if yclients_phones.count(phone) != 0:
@@ -173,7 +173,7 @@ def process_custom_phone_number(message):
                 staff_id = staff["id"]
                 yclients_phones.append(staff["user"]["phone"])
         except TypeError as error:
-            logging.info("phone number processing error: {}".format(error))
+            logging.info("phone number {} processing error: {}".format(phone, error))
             pass
 
     if yclients_phones.count(phone) != 0:
