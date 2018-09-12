@@ -142,7 +142,7 @@ def greeting_menu(message):
 def process_phone_number(message):
     user_id = message.chat.id
     bot.send_chat_action(chat_id=user_id, action="typing")
-    phone = message.contact.phone_number
+    phone = message.contact.phone_number.strip("+")
     yclients_phones = []
     for staff in yclient_api.get_all_staff():
         try:
