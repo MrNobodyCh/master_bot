@@ -89,13 +89,18 @@ def end_session(message):
         bot.send_message(chat_id=user_id, text=texts.SESSION_WAS_END)
 
 
-@bot.message_handler(commands=["change9952"])
+@bot.message_handler(commands=["pass"])
 def change_password(message):
     user_id = message.chat.id
-    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
-    markup.row(texts.CANCEL_OPERATION)
-    msg = bot.send_message(chat_id=user_id, text=texts.SEND_NEW_PASSWORD, reply_markup=markup)
-    bot.register_next_step_handler(msg, process_new_password)
+    user_auth = DBGetter(DBSettings.HOST).get("SELECT COUNT(*) FROM authorized_users "
+                                              "WHERE user_id = %s" % user_id)[0][0]
+    if user_auth == 1:
+        markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+        markup.row(texts.CANCEL_OPERATION)
+        msg = bot.send_message(chat_id=user_id, text=texts.SEND_NEW_PASSWORD, reply_markup=markup)
+        bot.register_next_step_handler(msg, process_new_password)
+    if user_auth == 0:
+        pass
 
 
 def process_new_password(message):
