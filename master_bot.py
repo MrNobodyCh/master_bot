@@ -345,6 +345,8 @@ def auth_staff_who_have_several_accounts(call):
                                          "SELECT %s, '%s', %s, %s WHERE NOT EXISTS "
                                          "(SELECT user_id, yclients_name, staff_id, staff_ids_count FROM masters "
                                          "WHERE user_id = %s)" % (user_id, staff_name, staff_id, 2, user_id))
+        # delete from fired_users in case when it re-login
+        DBGetter(DBSettings.HOST).insert("DELETE FROM fired_staff WHERE user_id = %s" % user_id)
         markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
         markup.row(texts.MY_RECORDS)
         markup.row(texts.LOGOUT % staff_name)
