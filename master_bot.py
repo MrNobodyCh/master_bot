@@ -34,9 +34,18 @@ def check_current_user_password(user_id):
     except IndexError:
         logged_in_password = current_password
 
-    if logged_in_password == current_password:
+    is_fired = DBGetter(DBSettings.HOST).get("SELECT * FROM fired_staff WHERE user_id = %s" % user_id)
+
+    if logged_in_password == current_password and len(is_fired) == 0:
         return "ok"
-    else:
+
+    if logged_in_password == current_password and len(is_fired) > 0:
+        return "fired"
+
+    if logged_in_password != current_password and len(is_fired) > 0:
+        return "fired"
+
+    if logged_in_password != current_password and len(is_fired) == 0:
         return "changed"
 
 
@@ -66,6 +75,68 @@ def process_changed_password(message):
         bot.register_next_step_handler(msg, process_changed_password)
 
 
+@bot.message_handler(commands=["end"])
+def end_session(message):
+    user_id = message.chat.id
+    try:
+        staff_db_name = DBGetter(DBSettings.HOST).get("SELECT yclients_name FROM masters "
+                                                      "WHERE user_id = %s" % user_id)[0]
+        DBGetter(DBSettings.HOST).insert("DELETE FROM masters WHERE user_id = %s" % user_id)
+        DBGetter(DBSettings.HOST).insert("DELETE FROM authorized_users WHERE user_id = %s" % user_id)
+        DBGetter(DBSettings.HOST).insert("INSERT INTO fired_staff VALUES (%s)" % user_id)
+        bot.send_message(chat_id=user_id, text=texts.SESSION_END % staff_db_name)
+    except IndexError:
+        bot.send_message(chat_id=user_id, text=texts.SESSION_WAS_END)
+
+
+@bot.message_handler(commands=["change9952"])
+def change_password(message):
+    user_id = message.chat.id
+    markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+    markup.row(texts.CANCEL_OPERATION)
+    msg = bot.send_message(chat_id=user_id, text=texts.SEND_NEW_PASSWORD, reply_markup=markup)
+    bot.register_next_step_handler(msg, process_new_password)
+
+
+def process_new_password(message):
+    user_id = message.chat.id
+    bot.send_chat_action(chat_id=user_id, action="typing")
+    if message.text == texts.CANCEL_OPERATION:
+        staff_db_name = DBGetter(DBSettings.HOST).get("SELECT yclients_name "
+                                                      "FROM masters WHERE user_id = %s" % user_id)[0]
+        staff_ids_count = DBGetter(DBSettings.HOST).get("SELECT staff_ids_count "
+                                                        "FROM masters WHERE user_id = %s" % message.chat.id)[0][0]
+        if staff_ids_count > 1:
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.row(texts.MY_RECORDS)
+            markup.row(texts.LOGOUT % staff_db_name)
+            bot.send_message(chat_id=user_id, text=texts.CANCELED, reply_markup=markup)
+        if staff_ids_count == 1:
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.row(texts.MY_RECORDS)
+            bot.send_message(chat_id=user_id, text=texts.CANCELED, reply_markup=markup)
+    else:
+        new_password = message.text
+        # update global password
+        DBGetter(DBSettings.HOST).insert("UPDATE current_password SET password = '%s'" % new_password)
+        # update user password who changed it
+        DBGetter(DBSettings.HOST).insert("UPDATE authorized_users SET logged_password = '%s' "
+                                         "WHERE user_id = %s" % (new_password, user_id))
+        staff_db_name = DBGetter(DBSettings.HOST).get("SELECT yclients_name "
+                                                      "FROM masters WHERE user_id = %s" % user_id)[0]
+        staff_ids_count = DBGetter(DBSettings.HOST).get("SELECT staff_ids_count "
+                                                        "FROM masters WHERE user_id = %s" % message.chat.id)[0][0]
+        if staff_ids_count > 1:
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.row(texts.MY_RECORDS)
+            markup.row(texts.LOGOUT % staff_db_name)
+            bot.send_message(chat_id=user_id, text=texts.NEW_PASSWORD_SET, reply_markup=markup)
+        if staff_ids_count == 1:
+            markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
+            markup.row(texts.MY_RECORDS)
+            bot.send_message(chat_id=user_id, text=texts.NEW_PASSWORD_SET, reply_markup=markup)
+
+
 @bot.message_handler(commands=["my_records"])
 def my_records_command(message):
     user_id = message.chat.id
@@ -75,9 +146,12 @@ def my_records_command(message):
             records_list_menu(message)
         except IndexError:
             greeting_menu(message)
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.message_handler(commands=["start"])
@@ -203,6 +277,8 @@ def process_password(message, staff_id, phone, yclients_phones):
                                              "(%s, '%s', %s, %s)" % (user_id, staff_name, staff_id, 1))
             DBGetter(DBSettings.HOST).insert("INSERT INTO authorized_users (user_id, phone, logged_password, is_admin) "
                                              "VALUES (%s, '%s', '%s', FALSE )" % (user_id, phone, password))
+            # delete from fired_users in case when it re-login
+            DBGetter(DBSettings.HOST).insert("DELETE FROM fired_staff WHERE user_id = %s" % user_id)
 
         # when the several staff in yClients with this phone
         else:
@@ -238,9 +314,12 @@ def staff_list_menu(message):
             markup.add(types.InlineKeyboardButton(text="%s" % k, callback_data="staff_%s_%s_%s" % (v, phone, password)))
         bot.send_message(user_id, text=texts.STAFF_LIST, reply_markup=markup,
                          disable_notification=True, parse_mode="Markdown")
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "staff")
@@ -270,9 +349,12 @@ def auth_staff_who_have_several_accounts(call):
         except ApiException:
             pass
         bot.send_message(chat_id=user_id, text=texts.AUTHORIZED % staff_name, reply_markup=markup)
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.message_handler(content_types=['text'], func=lambda message: message.text.split()[0] == u"\U0001F6D1")
@@ -290,9 +372,12 @@ def logout_staff(message):
         except IndexError as error:
             logging.info("error during logout: {}. message: {}".format(error, message.text))
             pass
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.message_handler(content_types=['text'], func=lambda message: message.text == texts.MY_RECORDS)
@@ -402,9 +487,12 @@ def records_list_menu(message):
                                                                                         client_name,
                                                                                         texts.VISIT_NOT_CAME),
                                      parse_mode="Markdown")
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] in ["yes", "no"])
@@ -459,9 +547,12 @@ def client_attendance_mark(call):
                 pass
         except KeyError:
             bot.edit_message_text(chat_id=user_id, message_id=call.message.message_id, text=texts.SEEMS_RECORD_DELETED)
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "send")
@@ -522,9 +613,12 @@ def prepare_report(call):
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton(text=texts.DONE, callback_data="done_%s" % record_id))
         bot.send_message(chat_id=user_id, text=texts.PUSH_THE_BUTTON, reply_markup=markup, parse_mode="Markdown")
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "serviceadd")
@@ -612,9 +706,12 @@ def add_goods(call):
                 bot.answer_callback_query(call.id, text=texts.ADDITIONAL_SERVICE_ADDED)
             except ApiException:
                 pass
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "comment")
@@ -626,9 +723,12 @@ def master_comment(call):
         markup.row(texts.CANCEL_OPERATION)
         msg = bot.send_message(user_id, text=texts.LEAVE_COMMENT_BELOW, reply_markup=markup)
         bot.register_next_step_handler(msg, lambda m: process_comment(m, record_id))
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 def process_comment(message, record_id):
@@ -642,11 +742,11 @@ def process_comment(message, record_id):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             markup.row(texts.MY_RECORDS)
             markup.row(texts.LOGOUT % staff_db_name)
-            bot.send_message(chat_id=user_id, text="Отменено", reply_markup=markup)
+            bot.send_message(chat_id=user_id, text=texts.CANCELED, reply_markup=markup)
         if staff_ids_count == 1:
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             markup.row(texts.MY_RECORDS)
-            bot.send_message(chat_id=user_id, text="Отменено", reply_markup=markup)
+            bot.send_message(chat_id=user_id, text=texts.CANCELED, reply_markup=markup)
     else:
         DBGetter(DBSettings.HOST).insert("UPDATE reports SET master_comment = '%s' "
                                          "WHERE record_id = %s" % (message.text, record_id))
@@ -783,9 +883,12 @@ def show_report(call, record_id_back=None):
                 bot.send_message(chat_id=user_id, text=texts.ERROR_REPORT_RESULTS)
         else:
             bot.send_message(chat_id=user_id, text=texts.ERROR_REPORT_PHOTO)
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] in ["changephoto", "addphoto"])
@@ -803,9 +906,12 @@ def add_change_photo(call, record_id_back=None):
         markup.row(texts.CANCEL_OPERATION)
         msg = bot.send_message(user_id, text=texts.SEND_PHOTO, reply_markup=markup)
         bot.register_next_step_handler(msg, lambda m: process_photo(m, record_id))
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 def process_photo(message, record_id):
@@ -818,11 +924,11 @@ def process_photo(message, record_id):
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             markup.row(texts.MY_RECORDS)
             markup.row(texts.LOGOUT % staff_db_name)
-            bot.send_message(chat_id=message.chat.id, text="Отменено", reply_markup=markup)
+            bot.send_message(chat_id=message.chat.id, text=texts.CANCELED, reply_markup=markup)
         if staff_ids_count == 1:
             markup = types.ReplyKeyboardMarkup(resize_keyboard=True)
             markup.row(texts.MY_RECORDS)
-            bot.send_message(chat_id=message.chat.id, text="Отменено", reply_markup=markup)
+            bot.send_message(chat_id=message.chat.id, text=texts.CANCELED, reply_markup=markup)
     else:
         try:
             bot.send_message(chat_id=message.chat.id, text=texts.UPLOADING_PHOTO)
@@ -1106,9 +1212,12 @@ def send_report_to_yclients(call):
                 except ApiException:
                     pass
                 logging.info("finished add service to record with record_id: {}".format(change_request["id"]))
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "editreport")
@@ -1215,9 +1324,12 @@ def edit_report(call):
                                                                                  texts.VISIT_FINISHED),
                                   parse_mode="Markdown", message_id=call.message.message_id)
             bot.send_message(chat_id=user_id, text=texts.VISIT_ALREADY_PAID)
-    else:
+    if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
+
+    if check_current_user_password(user_id) == "fired":
+        bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
 while True:
 

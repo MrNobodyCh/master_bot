@@ -5,3 +5,5 @@ CREATE TABLE IF NOT EXISTS reports (day VARCHAR, visit_date VARCHAR, staff_id BI
 CREATE TABLE IF NOT EXISTS current_password (password VARCHAR);
 
 CREATE TABLE IF NOT EXISTS authorized_users (user_id BIGINT, phone VARCHAR, logged_password VARCHAR, is_admin BOOLEAN DEFAULT FALSE);
+
+CREATE TABLE IF NOT EXISTS fired_staff (user_id BIGINT);
