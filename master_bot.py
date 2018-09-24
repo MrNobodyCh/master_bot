@@ -1338,18 +1338,6 @@ def edit_report(call):
     if check_current_user_password(user_id) == "fired":
         bot.send_message(chat_id=user_id, text=texts.SEEMS_FIRED)
 
-while True:
 
-    try:
-
-        bot.polling(none_stop=True)
-
-    # ConnectionError and ReadTimeout because of possible timeout of the requests library
-
-    # TypeError for moviepy errors
-
-    # maybe there are others, therefore Exception
-
-    except Exception as e:
-        logging.error(e)
-        time.sleep(5)
+if __name__ == '__main__':
+    bot.infinity_polling()
