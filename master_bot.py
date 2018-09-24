@@ -148,9 +148,11 @@ def my_records_command(message):
     if check_current_user_password(user_id) == "ok":
         try:
             staff_id = DBGetter(DBSettings.HOST).get("SELECT staff_id FROM masters WHERE user_id = %s" % user_id)[0][0]
+            logging.info("user with staff_id: {} not found".format(staff_id))
             records_list_menu(message)
         except IndexError:
             greeting_menu(message)
+
     if check_current_user_password(user_id) == "changed":
         msg = bot.send_message(chat_id=user_id, text=texts.PASSWORD_WAS_CHANGED)
         bot.register_next_step_handler(msg, process_changed_password)
