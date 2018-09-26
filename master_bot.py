@@ -148,7 +148,6 @@ def my_records_command(message):
     if check_current_user_password(user_id) == "ok":
         try:
             staff_id = DBGetter(DBSettings.HOST).get("SELECT staff_id FROM masters WHERE user_id = %s" % user_id)[0][0]
-            logging.info("user with staff_id: {} not found".format(staff_id))
             records_list_menu(message)
         except IndexError:
             greeting_menu(message)
