@@ -2,7 +2,11 @@
 # -*- coding: utf-8 -*-
 import ast
 import logging
+import os
 import sys
+dir_path = os.path.dirname(os.path.realpath(__file__))
+sys.path.append(dir_path.replace('webhook_bot', ''))
+
 import time
 from datetime import datetime, timedelta
 
