@@ -55,6 +55,7 @@ coverage.xml
 local_settings.py
 config.py
 debug.log
+*.pem
 # Flask stuff:
 instance/
 .webassets-cache

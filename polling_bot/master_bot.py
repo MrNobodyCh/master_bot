@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 import telebot
 from telebot.apihelper import ApiException
 
-import texts
-from config import BotSettings, DBSettings
-from getters import DBGetter, YClientsGetter, GooGl, UploadCareGetter
+from common.getters import DBGetter, YClientsGetter, GooGl, UploadCareGetter
+from common.config import BotSettings, DBSettings
+from common import texts
 
 reload(sys)
 sys.setdefaultencoding('utf-8')
