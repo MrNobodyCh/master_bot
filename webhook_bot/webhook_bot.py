@@ -1039,7 +1039,10 @@ def send_report_to_yclients(call):
             master_comment_for_record = record_info["comment"]
         else:
             master_comment_channel = master_comment_db
-            master_comment_for_record = master_comment_db
+            if record_info["comment"] == "":
+                master_comment_for_record = "Комментарий мастера: %s" % master_comment_db
+            else:
+                master_comment_for_record = "%s\nКомментарий мастера: %s" % (record_info["comment"], master_comment_db)
 
         try:
             goods_to_show = {}
