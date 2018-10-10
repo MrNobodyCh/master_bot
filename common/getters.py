@@ -183,7 +183,7 @@ class UploadCareGetter:
         status_url = 'https://upload.uploadcare.com/from_url/status/'
         params = {'token': '%s' % token}
         r = requests.get(url=status_url, params=params)
-        while r.json()["status"] == "progress":
+        while r.json()["status"] in ["progress", "unknown"]:
             time.sleep(1)
             r = requests.get(url=status_url, params=params)
         else:
