@@ -672,11 +672,11 @@ def add_goods(call):
                                                                          str((int(amount) - 1)), good_cost))
                 )
                 if goods_transactions is None:
-                    goods_db = {good_id: [int(amount) - 1, int(good_cost)]}
+                    goods_db = {good_id: [int(amount) - 1, float(good_cost)]}
                     DBGetter(DBSettings.HOST).insert("UPDATE reports SET goods_transactions = '%s' "
                                                      "WHERE record_id = %s" % (goods_db, record_id))
                 else:
-                    goods_transactions.update({good_id: [int(amount) - 1, int(good_cost)]})
+                    goods_transactions.update({good_id: [int(amount) - 1, float(good_cost)]})
                     if goods_transactions.get(good_id)[0] == 0:
                         goods_transactions.pop(good_id)
                     DBGetter(DBSettings.HOST).insert("UPDATE reports SET goods_transactions = '%s'"
@@ -702,11 +702,11 @@ def add_goods(call):
                     callback_data="goodadd_%s_%s_%s_%s" % (record_id, good_id, str((int(amount) + 1)), good_cost))
             )
             if goods_transactions is None:
-                goods_db = {good_id: [int(amount) + 1, int(good_cost)]}
+                goods_db = {good_id: [int(amount) + 1, float(good_cost)]}
                 DBGetter(DBSettings.HOST).insert("UPDATE reports SET goods_transactions = '%s' "
                                                  "WHERE record_id = %s" % (goods_db, record_id))
             else:
-                goods_transactions.update({good_id: [int(amount) + 1, int(good_cost)]})
+                goods_transactions.update({good_id: [int(amount) + 1, float(good_cost)]})
                 DBGetter(DBSettings.HOST).insert("UPDATE reports SET goods_transactions = '%s'"
                                                  "WHERE record_id = %s" % (goods_transactions, record_id))
             try:
