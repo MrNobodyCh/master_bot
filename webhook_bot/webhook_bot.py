@@ -224,13 +224,17 @@ def greeting_menu(message):
                                                      "WHERE user_id = %s" % user_id)[0][0]
             staff_ids = {}
             for staff in yclient_api.get_all_staff():
-                if str(staff["user"]["phone"]) == str(phone):
-                    staff_ids.update({staff["name"]: staff["id"]})
+                try:
+                    if str(staff["user"]["phone"]) == str(phone):
+                        staff_ids.update({staff["name"]: staff["id"]})
+                except TypeError as error:
+                    logging.info("phone number {} processing error: {}".format(phone, error))
+                    pass
             markup = types.InlineKeyboardMarkup()
             for k, v in staff_ids.iteritems():
                 markup.add(
                     types.InlineKeyboardButton(text="%s" % k, callback_data="staff_%s_%s_%s" % (v, phone, password))
-                )
+                    )
             bot.send_message(user_id, text=texts.STAFF_LIST, reply_markup=markup,
                              disable_notification=True, parse_mode="Markdown")
         else:
@@ -329,8 +333,12 @@ def process_password(message, staff_id, phone, yclients_phones):
         else:
             staff_ids = {}
             for staff in yclient_api.get_all_staff():
-                if str(staff["user"]["phone"]) == str(phone):
-                    staff_ids.update({staff["name"]: staff["id"]})
+                try:
+                    if str(staff["user"]["phone"]) == str(phone):
+                        staff_ids.update({staff["name"]: staff["id"]})
+                except TypeError as error:
+                    logging.info("phone number {} processing error: {}".format(phone, error))
+                    pass
             markup = types.InlineKeyboardMarkup()
             for k, v in staff_ids.iteritems():
                 markup.add(types.InlineKeyboardButton(text="%s" % k,
@@ -352,8 +360,12 @@ def staff_list_menu(message):
                                                  "WHERE user_id = %s" % user_id)[0][0]
         staff_ids = {}
         for staff in yclient_api.get_all_staff():
-            if str(staff["user"]["phone"]) == str(phone):
-                staff_ids.update({staff["name"]: staff["id"]})
+            try:
+                if str(staff["user"]["phone"]) == str(phone):
+                    staff_ids.update({staff["name"]: staff["id"]})
+            except TypeError as error:
+                logging.info("phone number {} processing error: {}".format(phone, error))
+                pass
         markup = types.InlineKeyboardMarkup()
         for k, v in staff_ids.iteritems():
             markup.add(types.InlineKeyboardButton(text="%s" % k, callback_data="staff_%s_%s_%s" % (v, phone, password)))
@@ -470,7 +482,10 @@ def records_list_menu(message):
                     service_name = record["services"][0]["title"]
                 except IndexError:
                     service_name = "Без основной услуги"
-                client_name = record["client"]["name"]
+                try:
+                    client_name = record["client"]["name"]
+                except TypeError:
+                    client_name = ""
                 visit_id = record["visit_id"]
                 visit_info = yclient_api.get_specific_visit(visit_id)
                 # when client not fill
@@ -852,8 +867,8 @@ def show_report(call, record_id_back=None):
                 seance_start_dt_obj = datetime.strptime(record_datetime, "%Y-%m-%dT%H:%M:%S+03:00")
                 seance_date = datetime.strftime(seance_start_dt_obj, "%Y-%m-%d")
                 seance_start = datetime.strftime(seance_start_dt_obj, "%H:%M")
-                photo = \
-                DBGetter(DBSettings.HOST).get("SELECT photo_id FROM reports WHERE record_id = %s" % record_id)[0][0]
+                photo = DBGetter(DBSettings.HOST).get("SELECT photo_id FROM reports "
+                                                      "WHERE record_id = %s" % record_id)[0][0]
                 main_service_name = yclient_api.get_specific_service(main_service_id)["title"]
                 main_service_cost = yclient_api.get_specific_service(main_service_id)["price_min"]
                 master_comment_db = DBGetter(DBSettings.HOST).get("SELECT master_comment FROM reports "
@@ -1286,7 +1301,10 @@ def edit_report(call):
         seance_start = datetime.strftime(seance_start_dt_obj, "%H:%M")
         seance_end_dt_obj = (seance_start_dt_obj + timedelta(seconds=seance_length))
         seance_end = datetime.strftime(seance_end_dt_obj, "%H:%M")
-        client_name = record["client"]["name"]
+        try:
+            client_name = record["client"]["name"]
+        except TypeError:
+            client_name = ""
         # when main service not fill
         try:
             service_name = record["services"][0]["title"]
