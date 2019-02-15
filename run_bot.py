@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
+import os
 import time
-import subprocess
 
 import requests
 import flask
@@ -28,7 +28,7 @@ def run_bot():
         else:
             return render_template('error.html')
     except ConnectionError:
-        subprocess.Popen("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &", shell=True)
+        os.system("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &")
         time.sleep(15)
         try:
             r = requests.get(url=bot_url, verify=False)
