@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 import os
+import time
+
 import requests
 import flask
 from flask import render_template
@@ -31,6 +33,7 @@ def run_bot():
                 return render_template('error.html')
     except ConnectionError:
         os.system("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &")
+        time.sleep(5)
         r = requests.get(url=bot_url, verify=False)
         if r.status_code == 200:
             return render_template('success.html')
