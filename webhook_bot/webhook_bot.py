@@ -21,16 +21,6 @@ from common.config import BotSettings, DBSettings, WebhooksSetting
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-WEBHOOK_HOST = WebhooksSetting.SERVER_HOST
-WEBHOOK_PORT = WebhooksSetting.SERVER_PORT  # 443, 80, 88 or 8443 (port need to be 'open')
-WEBHOOK_LISTEN = WebhooksSetting.SERVER_HOST  # In some VPS you may need to put here the IP addr
-
-WEBHOOK_SSL_CERT = WebhooksSetting.SSL_CERT  # Path to the ssl certificate
-WEBHOOK_SSL_PRIV = WebhooksSetting.SSL_PRIV  # Path to the ssl private key
-
-WEBHOOK_URL_BASE = "https://%s:%s" % (WEBHOOK_HOST, WEBHOOK_PORT)
-WEBHOOK_URL_PATH = "/%s/" % BotSettings.TOKEN
-
 logger = telebot.logger
 telebot.logger.setLevel(logging.INFO)
 
@@ -51,7 +41,7 @@ def index():
 
 
 # Process webhook calls
-@app.route(WEBHOOK_URL_PATH, methods=['POST'])
+@app.route(WebhooksSetting.WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
     if flask.request.headers.get('content-type') == 'application/json':
         json_string = flask.request.get_data().decode('utf-8')
@@ -1409,12 +1399,12 @@ bot.remove_webhook()
 time.sleep(1)
 
 # Set webhook
-bot.set_webhook(url=WEBHOOK_URL_BASE + WEBHOOK_URL_PATH,
-                certificate=open(WEBHOOK_SSL_CERT, 'r'))
+bot.set_webhook(url=WebhooksSetting.WEBHOOK_URL_BASE + WebhooksSetting.WEBHOOK_URL_PATH,
+                certificate=open(WebhooksSetting.WEBHOOK_SSL_CERT, 'r'))
 
 # Start flask server
 if __name__ == '__main__':
-    app.run(host=WEBHOOK_LISTEN,
-            port=WEBHOOK_PORT,
-            ssl_context=(WEBHOOK_SSL_CERT, WEBHOOK_SSL_PRIV),
+    app.run(host=WebhooksSetting.WEBHOOK_LISTEN,
+            port=WebhooksSetting.WEBHOOK_PORT,
+            ssl_context=(WebhooksSetting.WEBHOOK_SSL_CERT, WebhooksSetting.WEBHOOK_SSL_PRIV),
             debug=True)
