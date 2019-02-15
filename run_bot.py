@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os
+import time
 import subprocess
 
 import requests
@@ -26,17 +26,17 @@ def run_bot():
         if r.status_code == 200:
             return render_template('works_fine.html')
         else:
-            subprocess.Popen("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &").wait()
+            return render_template('error.html')
+    except ConnectionError:
+        subprocess.Popen("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &", shell=True)
+        time.sleep(15)
+        try:
+            r = requests.get(url=bot_url, verify=False)
             if r.status_code == 200:
                 return render_template('success.html')
             else:
                 return render_template('error.html')
-    except ConnectionError:
-        subprocess.Popen("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &").wait()
-        r = requests.get(url=bot_url, verify=False)
-        if r.status_code == 200:
-            return render_template('success.html')
-        else:
+        except ConnectionError:
             return render_template('error.html')
 
 
