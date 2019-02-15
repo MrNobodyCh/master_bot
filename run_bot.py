@@ -31,7 +31,7 @@ def run_bot():
             else:
                 return render_template('error.html')
     except ConnectionError:
-        subprocess.call("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &")
+        subprocess.call("source ../bin/activate && cd webhook_bot/ && python2.7 webhook_bot.py &", shell=True)
         r = requests.get(url=bot_url, verify=False)
         if r.status_code == 200:
             return render_template('success.html')
