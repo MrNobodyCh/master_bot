@@ -29,7 +29,7 @@ def run_bot():
             return render_template('error.html')
     except ConnectionError:
         os.system("source ../bin/activate")
-        os.system("cd webhook_bot/ && python2.7 webhook_bot.py &")
+        os.system("cd webhook_bot/ && python2.7 webhook_bot.py")
         time.sleep(15)
         try:
             r = requests.get(url=bot_url, verify=False)
