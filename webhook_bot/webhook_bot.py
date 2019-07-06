@@ -40,6 +40,11 @@ def index():
     return 'Bot using webhooks works fine!'
 
 
+@app.route('/feedlerhook', methods=['GET', 'HEAD'])
+def feedler_test():
+    return 'Feedler Bot using webhooks works fine!'
+
+
 # Process webhook calls
 @app.route(WebhooksSetting.WEBHOOK_URL_PATH, methods=['POST'])
 def webhook():
