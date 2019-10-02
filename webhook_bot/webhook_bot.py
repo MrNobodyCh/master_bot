@@ -996,9 +996,9 @@ def process_photo(message, record_id):
             photo_path = bot.get_file(file_id).file_path
             telegram_photo_url = "https://api.telegram.org/file/bot{}/{}".format(BotSettings.TOKEN, photo_path)
             uploaded_photo = UploadCareGetter().upload_photo(photo_url=telegram_photo_url)
-            short_photo_url = GooGl().short_link(uploaded_photo)
+            # short_photo_url = GooGl().short_link(uploaded_photo)
             DBGetter(DBSettings.HOST).insert("UPDATE reports SET photo = '%s', photo_id = '%s' "
-                                             "WHERE record_id = %s" % (short_photo_url, file_id, record_id))
+                                             "WHERE record_id = %s" % (uploaded_photo, file_id, record_id))
             staff_db_name = DBGetter(DBSettings.HOST).get("SELECT yclients_name "
                                                           "FROM masters WHERE user_id = %s" % message.chat.id)[0]
             staff_ids_count = DBGetter(DBSettings.HOST).get("SELECT staff_ids_count "
