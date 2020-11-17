@@ -1016,7 +1016,7 @@ def process_photo(message, record_id):
             bot.send_message(message.chat.id, text=texts.ERROR_DURING_PHOTO_ADD)
             time.sleep(1)
             add_change_photo(message, record_id)
-            logging.error("Error during photo processing: %s" % error)
+            logging.exception("Error during photo processing: %s" % error)
 
 
 @bot.callback_query_handler(func=lambda call: call.data.split('_')[0] == "sendreport")
@@ -1102,7 +1102,7 @@ def send_report_to_yclients(call):
             if isinstance(send_goods, dict) and send_goods.get('meta'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
-                logging.error("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
+                logging.exception("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
             else:
                 DBGetter(DBSettings.HOST).insert("UPDATE reports SET day = '%s', visit_date = '%s', visit_id = %s, "
                                                  "is_send = TRUE, first_cost = %s, cost = %s "
@@ -1160,7 +1160,7 @@ def send_report_to_yclients(call):
             if isinstance(send_goods, dict) and send_goods.get('meta'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
-                logging.error("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
+                logging.exception("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
             else:
                 logging.info("finished add goods to record with record_id: {}".format(record_id))
 
@@ -1190,7 +1190,7 @@ def send_report_to_yclients(call):
             if isinstance(change_request, dict) and change_request.get('errors'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
-                logging.error("error add service: {}".format(change_request.get('errors', {}).get('message', '')))
+                logging.exception("error add service: {}".format(change_request.get('errors', {}).get('message', '')))
             else:
                 DBGetter(DBSettings.HOST).insert("UPDATE reports SET day = '%s', visit_date = '%s', visit_id = %s, "
                                                  "is_send = TRUE, first_cost = %s, cost = %s "
@@ -1240,7 +1240,7 @@ def send_report_to_yclients(call):
             if isinstance(send_goods, dict) and send_goods.get('meta'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
-                logging.error("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
+                logging.exception("error during add goods: {}".format(send_goods.get('meta', {}).get('message', '')))
             else:
                 logging.info("finished add goods to record with record_id: {}".format(record_id))
 
@@ -1251,7 +1251,7 @@ def send_report_to_yclients(call):
             if isinstance(change_request, dict) and change_request.get('errors'):
                 bot.answer_callback_query(call.id, text=texts.REPORT_NOT_SEND)
                 bot.send_message(chat_id=user_id, text=texts.SOMETHING_WENT_WRONG)
-                logging.error("error add service: {}".format(change_request.get('errors', {}).get('message', '')))
+                logging.exception("error add service: {}".format(change_request.get('errors', {}).get('message', '')))
             else:
                 DBGetter(DBSettings.HOST).insert("UPDATE reports SET day = '%s', visit_date = '%s', visit_id = %s, "
                                                  "is_send = TRUE, first_cost = %s, cost = %s "
