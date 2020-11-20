@@ -49,12 +49,11 @@ coverage.xml
 # Translations
 *.mo
 *.pot
-
+webhook_bot.wsgi
 # Django stuff:
 ../../misc/tilda_listener/debug.log
 local_settings.py
 config.py
-webhook_bot/webhook_bot.wsgi
 debug.log
 *.pem
 # Flask stuff:
